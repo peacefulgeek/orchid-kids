@@ -55,16 +55,13 @@ if (isProd) {
   const publicDir = path.resolve(__dirname, '../public');
   app.use(express.static(publicDir, { maxAge: '7d' }));
 }
-
-// ── API / SEO routes ────────────────────────────────────────────
+// ── API / SEO routes ───────────────────────────────────────────────
 app.use('/health', healthRouter);
-app.use('/sitemap', sitemapRouter);
+app.use('/sitemap.xml', sitemapRouter);
 app.use('/robots.txt', robotsRouter);
 app.use('/', llmsRouter);
 app.use('/api/articles', articlesRouter);
-app.use('/api/assessments', assessmentsRouter);
-
-// ── SSR catch-all ───────────────────────────────────────────────
+app.use('/api/assessments', assessmentsRouter);// ── SSR catch-all ───────────────────────────────────────────────
 if (isProd) {
   const { renderPage } = await import('./ssr.js');
   app.get('*', renderPage);

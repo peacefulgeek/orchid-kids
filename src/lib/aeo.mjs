@@ -1,4 +1,4 @@
-import { query } from './db.mjs';
+import { getArticles } from './articleStore.mjs';
 
 const STRIP_PARAMS = new Set([
   'utm_source','utm_medium','utm_campaign','utm_term','utm_content',
@@ -17,7 +17,7 @@ export function buildCanonicalUrl(req) {
   return `${SITE_ORIGIN}${path}${url.search}`;
 }
 
-export function buildRobotsTxt(req) {
+export function buildRobotsTxt() {
   const origin = SITE_ORIGIN;
   return `User-agent: *
 Allow: /
@@ -38,7 +38,6 @@ User-agent: CCBot
 Allow: /
 
 Sitemap: ${origin}/sitemap.xml
-Sitemap: ${origin}/sitemap-articles.xml
 
 # LLM discoverability
 # Full site content: ${origin}/llms.txt
@@ -47,11 +46,7 @@ Sitemap: ${origin}/sitemap-articles.xml
 }
 
 export async function buildLlmsTxt() {
-  const { rows: articles } = await query(
-    `SELECT slug, title, meta_description, category, published_at
-     FROM articles WHERE status = 'published'
-     ORDER BY published_at DESC LIMIT 200`
-  );
+  const { articles } = await getArticles({ limit: 200 });
 
   const lines = [
     `# Raising Orchids`,
@@ -62,8 +57,15 @@ export async function buildLlmsTxt() {
     ``,
     `## Articles`,
     ...articles.map(a =>
-      `- [${a.title}](https://raisingorchids.com/articles/${a.slug}): ${a.meta_description || ''}`
+      `- [${a.title}](${SITE_ORIGIN}/articles/${a.slug}): ${a.meta_description || ''}`
     ),
+    ``,
+    `## Assessments`,
+    `- Is My Child Highly Sensitive? (${SITE_ORIGIN}/assessments/is-my-child-highly-sensitive)`,
+    `- Sensory Sensitivity Profile (${SITE_ORIGIN}/assessments/sensory-profile-assessment)`,
+    `- Emotional Regulation Readiness (${SITE_ORIGIN}/assessments/emotional-regulation-readiness)`,
+    `- School Environment Fit (${SITE_ORIGIN}/assessments/school-environment-fit)`,
+    `- Are You a Sensitive Parent? (${SITE_ORIGIN}/assessments/are-you-a-sensitive-parent)`,
     ``,
     `## Author`,
     `The Oracle Lover — Intuitive Educator & Oracle Guide. https://theoraclelover.com`,
@@ -73,14 +75,10 @@ export async function buildLlmsTxt() {
 }
 
 export async function buildLlmsFullTxt() {
-  const { rows: articles } = await query(
-    `SELECT slug, title, body, category, published_at
-     FROM articles WHERE status = 'published'
-     ORDER BY published_at DESC LIMIT 50`
-  );
+  const { articles } = await getArticles({ limit: 50 });
 
   const sections = articles.map(a =>
-    `## ${a.title}\nURL: https://raisingorchids.com/articles/${a.slug}\nCategory: ${a.category}\n\n${a.body.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}`
+    `## ${a.title}\nURL: ${SITE_ORIGIN}/articles/${a.slug}\nCategory: ${a.category}\n\n${(a.body || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}`
   );
 
   return `# Raising Orchids — Full Content Export\n\n${sections.join('\n\n---\n\n')}`;

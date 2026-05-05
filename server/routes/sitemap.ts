@@ -1,15 +1,13 @@
 import express from 'express';
-import { query } from '../../src/lib/db.mjs';
+import { getArticles } from '../../src/lib/articleStore.mjs';
 
 export const sitemapRouter = express.Router();
 
 const SITE_ORIGIN = process.env.SITE_ORIGIN || 'https://raisingorchids.com';
 
-sitemapRouter.get('.xml', async (req, res) => {
+sitemapRouter.get('/', async (req, res) => {
   try {
-    const { rows: articles } = await query(
-      `SELECT slug, last_modified_at FROM articles WHERE status = 'published'`
-    );
+    const { articles } = await getArticles({ limit: 1000 });
 
     const staticPages = [
       { loc: '/', priority: '1.0', changefreq: 'daily' },
@@ -22,18 +20,18 @@ sitemapRouter.get('.xml', async (req, res) => {
 
     const urls = [
       ...staticPages.map(p => `
-    <url>
-      <loc>${SITE_ORIGIN}${p.loc}</loc>
-      <changefreq>${p.changefreq}</changefreq>
-      <priority>${p.priority}</priority>
-    </url>`),
-      ...articles.map(a => `
-    <url>
-      <loc>${SITE_ORIGIN}/articles/${a.slug}</loc>
-      <lastmod>${new Date(a.last_modified_at).toISOString().split('T')[0]}</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-    </url>`),
+  <url>
+    <loc>${SITE_ORIGIN}${p.loc}</loc>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+  </url>`),
+      ...articles.map((a: any) => `
+  <url>
+    <loc>${SITE_ORIGIN}/articles/${a.slug}</loc>
+    <lastmod>${new Date(a.last_modified_at || a.published_at || Date.now()).toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`),
     ];
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -43,6 +41,7 @@ ${urls.join('')}
 
     res.type('application/xml').send(xml);
   } catch (err) {
+    console.error('[sitemap] error:', err);
     res.status(500).send('Error generating sitemap');
   }
 });
