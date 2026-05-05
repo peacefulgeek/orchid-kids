@@ -1,0 +1,13 @@
+import express from 'express';
+
+export const healthRouter = express.Router();
+
+healthRouter.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    site: 'raising-orchids',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    env: process.env.NODE_ENV,
+  });
+});
