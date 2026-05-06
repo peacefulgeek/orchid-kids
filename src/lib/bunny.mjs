@@ -1,8 +1,8 @@
-// HARDCODED per site — DO NOT move to env vars (per spec Section 9)
-const BUNNY_STORAGE_ZONE = 'orchid-kids2';
-const BUNNY_API_KEY      = 'e6cf9995-cda6-4ce8-a4d61093c099-18b2-4e5c';
-const BUNNY_PULL_ZONE    = 'https://orchid-kids2.b-cdn.net';
-const BUNNY_HOSTNAME     = 'ny.storage.bunnycdn.com';
+// Bunny CDN config — set BUNNY_API_KEY env var in production (DigitalOcean App Platform)
+const BUNNY_STORAGE_ZONE = process.env.BUNNY_STORAGE_ZONE || 'orchid-kids2';
+const BUNNY_API_KEY      = process.env.BUNNY_API_KEY || '';
+const BUNNY_PULL_ZONE    = process.env.BUNNY_PULL_ZONE || 'https://orchid-kids2.b-cdn.net';
+const BUNNY_HOSTNAME     = process.env.BUNNY_HOSTNAME || 'ny.storage.bunnycdn.com';
 
 export { BUNNY_PULL_ZONE };
 
