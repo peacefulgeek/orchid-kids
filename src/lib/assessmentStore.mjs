@@ -1,126 +1,57 @@
 /**
  * assessmentStore.mjs
- * Built-in assessments data — works without a database.
+ * 9 built-in assessments — works without a database.
+ * All hero images served from Bunny CDN orchid-kids2.
  */
 
+const CDN = 'https://orchid-kids2.b-cdn.net';
+
 export const ASSESSMENTS = [
+  // ─── 1. Is My Child Highly Sensitive? ────────────────────────────────────────
   {
     id: 1,
     slug: 'is-my-child-highly-sensitive',
     title: 'Is My Child Highly Sensitive?',
-    description: 'Based on Elaine Aron\'s validated HSC scale, this assessment helps you understand whether your child shows the core characteristics of high sensitivity — and what that means for your parenting approach.',
+    description: "Based on Elaine Aron's validated HSC scale, this assessment helps you understand whether your child shows the core characteristics of high sensitivity — and what that means for your parenting approach.",
     category: 'understanding-hsc',
-    hero_url: '/images/hero-assessment.jpg',
+    hero_url: `${CDN}/library/lib-01.webp`,
     question_count: 15,
     time_minutes: 5,
     questions: [
-      {
-        id: 1,
-        text: 'My child is bothered by scratchy clothing, seams in socks, or tags in shirts.',
-        type: 'scale',
-        dimension: 'sensory'
-      },
-      {
-        id: 2,
-        text: 'My child notices and is bothered by subtle sounds — a clock ticking, a distant conversation, background music.',
-        type: 'scale',
-        dimension: 'sensory'
-      },
-      {
-        id: 3,
-        text: 'My child has a particularly deep, complex inner life and rich imagination.',
-        type: 'scale',
-        dimension: 'depth'
-      },
-      {
-        id: 4,
-        text: 'My child is deeply moved by music, art, or nature — more so than other children their age.',
-        type: 'scale',
-        dimension: 'depth'
-      },
-      {
-        id: 5,
-        text: 'My child is very aware of other people\'s moods and is deeply affected by others\' emotions.',
-        type: 'scale',
-        dimension: 'empathy'
-      },
-      {
-        id: 6,
-        text: 'My child becomes overwhelmed in busy, noisy, or chaotic environments.',
-        type: 'scale',
-        dimension: 'overstimulation'
-      },
-      {
-        id: 7,
-        text: 'My child asks deep, philosophical questions for their age — about life, death, fairness, or meaning.',
-        type: 'scale',
-        dimension: 'depth'
-      },
-      {
-        id: 8,
-        text: 'My child has a hard time with transitions — moving from one activity to another.',
-        type: 'scale',
-        dimension: 'overstimulation'
-      },
-      {
-        id: 9,
-        text: 'My child is very conscientious — they care deeply about doing things right and feel bad when they make mistakes.',
-        type: 'scale',
-        dimension: 'depth'
-      },
-      {
-        id: 10,
-        text: 'My child is startled easily by sudden noises or unexpected events.',
-        type: 'scale',
-        dimension: 'sensory'
-      },
-      {
-        id: 11,
-        text: 'My child notices subtle changes — a slight shift in a parent\'s mood, a minor change in routine, a new smell.',
-        type: 'scale',
-        dimension: 'subtleties'
-      },
-      {
-        id: 12,
-        text: 'My child performs worse (or refuses to try) when being observed or evaluated.',
-        type: 'scale',
-        dimension: 'overstimulation'
-      },
-      {
-        id: 13,
-        text: 'My child is deeply affected by violence, cruelty, or injustice — in real life or in media.',
-        type: 'scale',
-        dimension: 'empathy'
-      },
-      {
-        id: 14,
-        text: 'My child needs more time to decompress after a busy or stimulating day.',
-        type: 'scale',
-        dimension: 'overstimulation'
-      },
-      {
-        id: 15,
-        text: 'My child is very perceptive — they notice things about people and situations that others miss.',
-        type: 'scale',
-        dimension: 'subtleties'
-      }
+      { id: 1, text: 'My child is bothered by scratchy clothing, seams in socks, or tags in shirts.', type: 'scale', dimension: 'sensory' },
+      { id: 2, text: 'My child notices and is bothered by subtle sounds — a clock ticking, a distant conversation, background music.', type: 'scale', dimension: 'sensory' },
+      { id: 3, text: 'My child has a particularly deep, complex inner life and rich imagination.', type: 'scale', dimension: 'depth' },
+      { id: 4, text: 'My child is deeply moved by music, art, or nature — more so than other children their age.', type: 'scale', dimension: 'depth' },
+      { id: 5, text: "My child is very aware of other people's moods and is deeply affected by others' emotions.", type: 'scale', dimension: 'empathy' },
+      { id: 6, text: 'My child becomes overwhelmed in busy, noisy, or chaotic environments.', type: 'scale', dimension: 'overstimulation' },
+      { id: 7, text: 'My child asks deep, philosophical questions for their age — about life, death, fairness, or meaning.', type: 'scale', dimension: 'depth' },
+      { id: 8, text: 'My child has a hard time with transitions — moving from one activity to another.', type: 'scale', dimension: 'overstimulation' },
+      { id: 9, text: 'My child is very conscientious — they care deeply about doing things right and feel bad when they make mistakes.', type: 'scale', dimension: 'depth' },
+      { id: 10, text: 'My child is startled easily by sudden noises or unexpected events.', type: 'scale', dimension: 'sensory' },
+      { id: 11, text: "My child notices subtle changes — a slight shift in a parent's mood, a minor change in routine, a new smell.", type: 'scale', dimension: 'subtleties' },
+      { id: 12, text: 'My child performs worse (or refuses to try) when being observed or evaluated.', type: 'scale', dimension: 'overstimulation' },
+      { id: 13, text: 'My child is deeply affected by violence, cruelty, or injustice — in real life or in media.', type: 'scale', dimension: 'empathy' },
+      { id: 14, text: 'My child needs more time to decompress after a busy or stimulating day.', type: 'scale', dimension: 'overstimulation' },
+      { id: 15, text: 'My child is very perceptive — they notice things about people and situations that others miss.', type: 'scale', dimension: 'subtleties' },
     ],
     scoring: {
       scale: [
         { min: 0, max: 25, label: 'Low Sensitivity', description: 'Your child shows few signs of high sensitivity. They may have a more resilient, adaptable nervous system that handles stimulation and change with relative ease. This is a strength in many environments.', color: '#4CAF50', recommendations: ['Focus on providing consistent, loving structure', 'Encourage exploration and challenge', 'Standard parenting approaches are likely working well for your family'] },
         { min: 26, max: 45, label: 'Moderate Sensitivity', description: 'Your child shows some characteristics of high sensitivity in certain areas. They may benefit from some environmental adjustments and additional support in specific situations, while being generally adaptable.', color: '#FF9800', recommendations: ['Pay attention to which situations are most challenging', 'Build in some quiet downtime after busy periods', 'Validate their feelings while also building their coping skills'] },
-        { min: 46, max: 60, label: 'High Sensitivity', description: 'Your child shows strong characteristics of high sensitivity. Their nervous system processes information deeply and thoroughly, which can be both a gift and a challenge. With the right environment and understanding, highly sensitive children thrive.', color: '#8A6080', recommendations: ['Read Elaine Aron\'s "The Highly Sensitive Child"', 'Focus on environmental design — reduce unnecessary stimulation', 'Build in daily quiet and recovery time', 'Connect with other parents of sensitive children', 'Reframe the trait as a gift, not a deficit'] }
-      ]
+        { min: 46, max: 60, label: 'High Sensitivity', description: "Your child shows strong characteristics of high sensitivity. Their nervous system processes information deeply and thoroughly, which can be both a gift and a challenge. With the right environment and understanding, highly sensitive children thrive.", color: '#8A6080', recommendations: ["Read Elaine Aron's 'The Highly Sensitive Child'", 'Focus on environmental design — reduce unnecessary stimulation', 'Build in daily quiet and recovery time', 'Connect with other parents of sensitive children', 'Reframe the trait as a gift, not a deficit'] },
+      ],
     },
-    created_at: new Date().toISOString()
+    created_at: new Date().toISOString(),
   },
+
+  // ─── 2. Sensory Sensitivity Profile ──────────────────────────────────────────
   {
     id: 2,
     slug: 'sensory-sensitivity-profile',
-    title: 'Your Child\'s Sensory Sensitivity Profile',
+    title: "Your Child's Sensory Sensitivity Profile",
     description: 'Identify which sensory channels are most sensitive for your child — sight, sound, touch, smell, taste, or movement — and get targeted strategies for each.',
     category: 'sensory-environment',
-    hero_url: '/images/hero-sensory.jpg',
+    hero_url: `${CDN}/library/lib-08.webp`,
     question_count: 20,
     time_minutes: 7,
     questions: [
@@ -130,7 +61,7 @@ export const ASSESSMENTS = [
       { id: 4, text: 'My child is startled or upset by sudden loud noises.', type: 'scale', dimension: 'auditory' },
       { id: 5, text: 'My child objects to certain clothing textures, seams, or tags.', type: 'scale', dimension: 'tactile' },
       { id: 6, text: 'My child dislikes being touched unexpectedly or lightly.', type: 'scale', dimension: 'tactile' },
-      { id: 7, text: 'My child is bothered by certain smells that others don\'t notice.', type: 'scale', dimension: 'olfactory' },
+      { id: 7, text: "My child is bothered by certain smells that others don't notice.", type: 'scale', dimension: 'olfactory' },
       { id: 8, text: 'My child refuses foods based on smell before even tasting them.', type: 'scale', dimension: 'olfactory' },
       { id: 9, text: 'My child is very particular about food textures, temperatures, or mixed foods.', type: 'scale', dimension: 'gustatory' },
       { id: 10, text: 'My child has a limited range of foods they will eat.', type: 'scale', dimension: 'gustatory' },
@@ -143,31 +74,33 @@ export const ASSESSMENTS = [
       { id: 17, text: 'My child is overwhelmed by environments with multiple sensory inputs at once.', type: 'scale', dimension: 'integration' },
       { id: 18, text: 'My child needs more time to recover after sensory-rich experiences.', type: 'scale', dimension: 'integration' },
       { id: 19, text: 'My child seeks out certain sensory experiences intensely (spinning, crashing, etc.).', type: 'scale', dimension: 'seeking' },
-      { id: 20, text: 'My child has sensory experiences that are calming and regulating for them.', type: 'scale', dimension: 'seeking' }
+      { id: 20, text: 'My child has sensory experiences that are calming and regulating for them.', type: 'scale', dimension: 'seeking' },
     ],
     scoring: {
       dimensions: {
-        visual: { label: 'Visual', icon: '👁️', strategies: ['Use warm, indirect lighting instead of overhead fluorescents', 'Reduce visual clutter in key spaces', 'Allow sunglasses outdoors', 'Create visually calm study spaces'] },
-        auditory: { label: 'Auditory', icon: '👂', strategies: ['Provide noise-canceling headphones for busy environments', 'Use white noise or nature sounds for sleep', 'Give advance warning before loud activities', 'Create quiet zones in the home'] },
-        tactile: { label: 'Touch', icon: '🤚', strategies: ['Remove tags from clothing, use seamless socks', 'Let your child choose their own clothing', 'Provide deep pressure through hugs or weighted blankets', 'Warn before unexpected touch'] },
-        olfactory: { label: 'Smell', icon: '👃', strategies: ['Use unscented products where possible', 'Ventilate cooking smells', 'Allow your child to smell foods before eating', 'Be aware of strong perfumes or cleaning products'] },
-        gustatory: { label: 'Taste/Food', icon: '👅', strategies: ['Use the exposure ladder — gradual, pressure-free food introduction', 'Always provide a safe food at meals', 'Respect texture aversions without judgment', 'Consult a feeding therapist if needed'] },
-        vestibular: { label: 'Movement/Balance', icon: '🌀', strategies: ['Introduce movement activities gradually', 'Allow your child to control the pace of movement', 'Provide stable seating with feet on the floor', 'Consider occupational therapy evaluation'] },
-        proprioceptive: { label: 'Body Awareness', icon: '💪', strategies: ['Provide heavy work activities (carrying, pushing, pulling)', 'Use weighted vests or lap pads', 'Encourage physical activities with body awareness', 'Consider OT evaluation for significant difficulties'] },
-        interoceptive: { label: 'Internal Awareness', icon: '❤️', strategies: ['Use visual hunger/thirst/tiredness scales', 'Build in regular check-ins about body states', 'Practice body scan exercises', 'Maintain consistent meal and sleep schedules'] },
-        integration: { label: 'Sensory Integration', icon: '🧩', strategies: ['Reduce multi-sensory environments when possible', 'Build in sensory breaks throughout the day', 'Create a personalized sensory diet with an OT', 'Prepare your child before entering busy environments'] },
-        seeking: { label: 'Sensory Seeking', icon: '🔍', strategies: ['Provide safe outlets for sensory seeking', 'Channel seeking behaviors into appropriate activities', 'Use sensory seeking as a regulation tool', 'Understand seeking as a nervous system need, not misbehavior'] }
-      }
+        visual: { label: 'Visual', strategies: ['Use warm, indirect lighting instead of overhead fluorescents', 'Reduce visual clutter in key spaces', 'Allow sunglasses outdoors', 'Create visually calm study spaces'] },
+        auditory: { label: 'Auditory', strategies: ['Provide noise-canceling headphones for busy environments', 'Use white noise or nature sounds for sleep', 'Give advance warning before loud activities', 'Create quiet zones in the home'] },
+        tactile: { label: 'Touch', strategies: ['Remove tags from clothing, use seamless socks', 'Let your child choose their own clothing', 'Provide deep pressure through hugs or weighted blankets', 'Warn before unexpected touch'] },
+        olfactory: { label: 'Smell', strategies: ['Use unscented products where possible', 'Ventilate cooking smells', 'Allow your child to smell foods before eating', 'Be aware of strong perfumes or cleaning products'] },
+        gustatory: { label: 'Taste/Food', strategies: ['Use the exposure ladder — gradual, pressure-free food introduction', 'Always provide a safe food at meals', 'Respect texture aversions without judgment', 'Consult a feeding therapist if needed'] },
+        vestibular: { label: 'Movement/Balance', strategies: ['Introduce movement activities gradually', 'Allow your child to control the pace of movement', 'Provide stable seating with feet on the floor', 'Consider occupational therapy evaluation'] },
+        proprioceptive: { label: 'Body Awareness', strategies: ['Provide heavy work activities (carrying, pushing, pulling)', 'Use weighted vests or lap pads', 'Encourage physical activities with body awareness', 'Consider OT evaluation for significant difficulties'] },
+        interoceptive: { label: 'Internal Awareness', strategies: ['Use visual hunger/thirst/tiredness scales', 'Build in regular check-ins about body states', 'Practice body scan exercises', 'Maintain consistent meal and sleep schedules'] },
+        integration: { label: 'Sensory Integration', strategies: ['Reduce multi-sensory environments when possible', 'Build in sensory breaks throughout the day', 'Create a personalized sensory diet with an OT', 'Prepare your child before entering busy environments'] },
+        seeking: { label: 'Sensory Seeking', strategies: ['Provide safe outlets for sensory seeking', 'Channel seeking behaviors into appropriate activities', 'Use sensory seeking as a regulation tool', 'Understand seeking as a nervous system need, not misbehavior'] },
+      },
     },
-    created_at: new Date().toISOString()
+    created_at: new Date().toISOString(),
   },
+
+  // ─── 3. Emotional Regulation Readiness ───────────────────────────────────────
   {
     id: 3,
     slug: 'emotional-regulation-readiness',
     title: 'Emotional Regulation Readiness Assessment',
     description: 'Understand where your child is in their emotional regulation development and get targeted strategies to build their capacity to feel deeply without being overwhelmed.',
     category: 'emotional-wellbeing',
-    hero_url: '/images/hero-emotional.jpg',
+    hero_url: `${CDN}/library/lib-16.webp`,
     question_count: 12,
     time_minutes: 5,
     questions: [
@@ -179,86 +112,250 @@ export const ASSESSMENTS = [
       { id: 6, text: 'My child recovers from upsets within 20-30 minutes.', type: 'scale', dimension: 'recovery' },
       { id: 7, text: 'My child can talk about their feelings after they have calmed down.', type: 'scale', dimension: 'reflection' },
       { id: 8, text: 'My child understands that their feelings are valid, even if their behavior needs to change.', type: 'scale', dimension: 'self_compassion' },
-      { id: 9, text: 'My child can distinguish between their own feelings and others\' feelings.', type: 'scale', dimension: 'boundaries' },
-      { id: 10, text: 'My child has a calm-down space or toolkit they use proactively.', type: 'scale', dimension: 'tools' },
+      { id: 9, text: "My child can distinguish between their own feelings and others' feelings.", type: 'scale', dimension: 'boundaries' },
+      { id: 10, text: 'My child has a calm-down space or toolkit they use proactively.', type: 'scale', dimension: 'strategies' },
       { id: 11, text: 'My child can maintain friendships despite emotional intensity.', type: 'scale', dimension: 'social' },
-      { id: 12, text: 'My child shows improvement in emotional regulation over the past year.', type: 'scale', dimension: 'growth' }
+      { id: 12, text: 'My child shows improvement in emotional regulation over the past year.', type: 'scale', dimension: 'growth' },
     ],
     scoring: {
       scale: [
-        { min: 0, max: 20, label: 'Early Development', description: 'Your child is in the early stages of emotional regulation development. This is completely normal — regulation is a skill that develops over years. Focus on building the foundational skills: emotional vocabulary, body awareness, and co-regulation.', color: '#FF9800', recommendations: ['Focus on emotional vocabulary — name feelings precisely', 'Practice body scans and body awareness exercises', 'Be the external regulator — your calm is their calm', 'Read books about emotions together', 'Don\'t expect self-regulation yet — co-regulation comes first'] },
+        { min: 0, max: 20, label: 'Early Development', description: 'Your child is in the early stages of emotional regulation development. This is completely normal — regulation is a skill that develops over years. Focus on building the foundational skills: emotional vocabulary, body awareness, and co-regulation.', color: '#FF9800', recommendations: ['Focus on emotional vocabulary — name feelings precisely', 'Practice body scans and body awareness exercises', 'Be the external regulator — your calm is their calm', 'Read books about emotions together', "Don't expect self-regulation yet — co-regulation comes first"] },
         { min: 21, max: 36, label: 'Building Capacity', description: 'Your child is developing their regulation skills and showing real progress. They have some tools and awareness, but still need significant support in challenging situations. Focus on expanding their toolkit and building self-awareness.', color: '#2196F3', recommendations: ['Expand their sensory toolkit', 'Practice regulation strategies during calm times', 'Help them identify their early warning signs', 'Build in proactive regulation — sensory breaks, quiet time', 'Celebrate regulation wins explicitly'] },
-        { min: 37, max: 48, label: 'Strong Foundation', description: 'Your child has developed a solid foundation of emotional regulation skills. They have vocabulary, awareness, and strategies. Continue building on this foundation and helping them apply their skills in increasingly challenging situations.', color: '#4CAF50', recommendations: ['Support independent use of their toolkit', 'Help them advocate for their needs in new environments', 'Introduce mindfulness practices', 'Discuss the neuroscience of emotions in age-appropriate ways', 'Celebrate their growth and the journey ahead'] }
-      ]
+        { min: 37, max: 48, label: 'Strong Foundation', description: 'Your child has developed a solid foundation of emotional regulation skills. They have vocabulary, awareness, and strategies. Continue building on this foundation and helping them apply their skills in increasingly challenging situations.', color: '#4CAF50', recommendations: ['Support independent use of their toolkit', 'Help them advocate for their needs in new environments', 'Introduce mindfulness practices', 'Discuss the neuroscience of emotions in age-appropriate ways', 'Celebrate their growth and the journey ahead'] },
+      ],
     },
-    created_at: new Date().toISOString()
+    created_at: new Date().toISOString(),
   },
+
+  // ─── 4. School Environment Fit ───────────────────────────────────────────────
   {
     id: 4,
     slug: 'school-environment-fit',
-    title: 'School Environment Fit Assessment',
-    description: 'Evaluate how well your child\'s current school environment fits their sensitive nervous system — and identify specific areas where accommodations could make a significant difference.',
+    title: "School Environment Fit Assessment",
+    description: "Evaluate how well your child's current school environment fits their sensitive nervous system — and identify specific areas where accommodations could make a significant difference.",
     category: 'school-social',
-    hero_url: '/images/hero-school.jpg',
+    hero_url: `${CDN}/library/lib-22.webp`,
     question_count: 14,
     time_minutes: 6,
     questions: [
-      { id: 1, text: 'My child\'s teacher understands and accommodates their sensitivity.', type: 'scale', dimension: 'teacher' },
-      { id: 2, text: 'My child\'s classroom has manageable sensory conditions (lighting, noise, visual complexity).', type: 'scale', dimension: 'sensory' },
+      { id: 1, text: "My child's teacher understands and accommodates their sensitivity.", type: 'scale', dimension: 'teacher' },
+      { id: 2, text: "My child's classroom has manageable sensory conditions (lighting, noise, visual complexity).", type: 'scale', dimension: 'sensory' },
       { id: 3, text: 'My child has access to a quiet space when they need to decompress.', type: 'scale', dimension: 'sensory' },
       { id: 4, text: 'My child receives adequate transition warnings and preparation for schedule changes.', type: 'scale', dimension: 'transitions' },
-      { id: 5, text: 'My child\'s intellectual needs are being met — they are appropriately challenged.', type: 'scale', dimension: 'academic' },
+      { id: 5, text: "My child's intellectual needs are being met — they are appropriately challenged.", type: 'scale', dimension: 'academic' },
       { id: 6, text: 'My child feels safe and accepted by their peers.', type: 'scale', dimension: 'social' },
       { id: 7, text: 'My child is not being bullied or excluded because of their sensitivity.', type: 'scale', dimension: 'social' },
       { id: 8, text: 'My child has at least one genuine friend at school.', type: 'scale', dimension: 'social' },
-      { id: 9, text: 'My child\'s school day includes some unstructured, low-demand time.', type: 'scale', dimension: 'schedule' },
+      { id: 9, text: "My child's school day includes some unstructured, low-demand time.", type: 'scale', dimension: 'schedule' },
       { id: 10, text: 'My child is not significantly more dysregulated after school than before.', type: 'scale', dimension: 'regulation' },
-      { id: 11, text: 'My child\'s school communicates proactively about challenges and changes.', type: 'scale', dimension: 'communication' },
+      { id: 11, text: "My child's school communicates proactively about challenges and changes.", type: 'scale', dimension: 'communication' },
       { id: 12, text: 'My child expresses positive feelings about school at least some of the time.', type: 'scale', dimension: 'wellbeing' },
-      { id: 13, text: 'My child\'s school performance reflects their actual capability.', type: 'scale', dimension: 'academic' },
-      { id: 14, text: 'I feel heard and respected when I advocate for my child\'s needs at school.', type: 'scale', dimension: 'partnership' }
+      { id: 13, text: "My child's school performance reflects their actual capability.", type: 'scale', dimension: 'academic' },
+      { id: 14, text: "I feel heard and respected when I advocate for my child's needs at school.", type: 'scale', dimension: 'partnership' },
     ],
     scoring: {
       scale: [
-        { min: 0, max: 25, label: 'Poor Fit', description: 'Your child\'s current school environment is significantly mismatched with their sensitive nervous system. This is likely contributing to stress, dysregulation, and underperformance. Immediate advocacy and possibly a change of environment may be needed.', color: '#F44336', recommendations: ['Request an urgent meeting with the teacher and school counselor', 'Document specific challenges and their impact', 'Research 504 plans or IEP options', 'Consider whether a different school environment might be a better fit', 'Connect with a parent advocate if needed'] },
-        { min: 26, max: 42, label: 'Partial Fit', description: 'Your child\'s school environment has some strengths but significant gaps. There are specific areas where targeted advocacy and accommodations could make a meaningful difference. Focus on the lowest-scoring areas first.', color: '#FF9800', recommendations: ['Identify the two or three most impactful areas for improvement', 'Schedule a meeting with the teacher to share what you\'ve learned', 'Bring specific, actionable accommodation requests', 'Build a positive relationship with the teacher before making demands', 'Follow up regularly and document progress'] },
-        { min: 43, max: 56, label: 'Good Fit', description: 'Your child\'s school environment is reasonably well-matched to their needs. There may be specific areas for improvement, but the overall fit is supportive. Focus on maintaining and strengthening what is working.', color: '#4CAF50', recommendations: ['Express appreciation to teachers who are doing well', 'Address remaining gaps proactively', 'Help your child develop self-advocacy skills', 'Stay engaged with the school community', 'Share what works with next year\'s teacher'] }
-      ]
+        { min: 0, max: 25, label: 'Poor Fit', description: "Your child's current school environment is significantly mismatched with their sensitive nervous system. This is likely contributing to stress, dysregulation, and underperformance. Immediate advocacy and possibly a change of environment may be needed.", color: '#F44336', recommendations: ['Request an urgent meeting with the teacher and school counselor', 'Document specific challenges and their impact', 'Research 504 plans or IEP options', 'Consider whether a different school environment might be a better fit', 'Connect with a parent advocate if needed'] },
+        { min: 26, max: 42, label: 'Partial Fit', description: "Your child's school environment has some strengths but significant gaps. There are specific areas where targeted advocacy and accommodations could make a meaningful difference. Focus on the lowest-scoring areas first.", color: '#FF9800', recommendations: ["Identify the two or three most impactful areas for improvement", "Schedule a meeting with the teacher to share what you've learned", 'Bring specific, actionable accommodation requests', 'Build a positive relationship with the teacher before making demands', 'Follow up regularly and document progress'] },
+        { min: 43, max: 56, label: 'Good Fit', description: "Your child's school environment is reasonably well-matched to their needs. There may be specific areas for improvement, but the overall fit is supportive. Focus on maintaining and strengthening what is working.", color: '#4CAF50', recommendations: ['Express appreciation to teachers who are doing well', 'Address remaining gaps proactively', 'Help your child develop self-advocacy skills', 'Stay engaged with the school community', "Share what works with next year's teacher"] },
+      ],
     },
-    created_at: new Date().toISOString()
+    created_at: new Date().toISOString(),
   },
+
+  // ─── 5. Parent Sensitivity Self-Assessment ────────────────────────────────────
   {
     id: 5,
     slug: 'parent-sensitivity-self-assessment',
     title: 'Are You a Sensitive Parent?',
     description: 'Many parents of sensitive children are sensitive themselves. Understanding your own sensitivity helps you parent more effectively and take better care of yourself.',
     category: 'family-dynamics',
-    hero_url: '/images/hero-family.jpg',
+    hero_url: `${CDN}/library/lib-31.webp`,
     question_count: 12,
     time_minutes: 5,
     questions: [
       { id: 1, text: 'I am easily overwhelmed by loud noises, bright lights, or chaotic environments.', type: 'scale', dimension: 'sensory' },
-      { id: 2, text: 'I am deeply affected by others\' emotions — I often absorb how others are feeling.', type: 'scale', dimension: 'empathy' },
+      { id: 2, text: "I am deeply affected by others' emotions — I often absorb how others are feeling.", type: 'scale', dimension: 'empathy' },
       { id: 3, text: 'I need more time alone to decompress after social or stimulating situations.', type: 'scale', dimension: 'recovery' },
       { id: 4, text: 'I am deeply moved by music, art, nature, or beauty.', type: 'scale', dimension: 'depth' },
-      { id: 5, text: 'I am very conscientious and notice when I\'ve made mistakes or hurt others.', type: 'scale', dimension: 'conscientiousness' },
-      { id: 6, text: 'I process experiences deeply — I think about things long after they\'ve happened.', type: 'scale', dimension: 'processing' },
+      { id: 5, text: "I am very conscientious and notice when I've made mistakes or hurt others.", type: 'scale', dimension: 'conscientiousness' },
+      { id: 6, text: "I process experiences deeply — I think about things long after they've happened.", type: 'scale', dimension: 'processing' },
       { id: 7, text: 'I am startled easily by sudden noises or unexpected events.', type: 'scale', dimension: 'sensory' },
       { id: 8, text: 'I feel overwhelmed when I have too much to do in too little time.', type: 'scale', dimension: 'overstimulation' },
       { id: 9, text: 'I find it hard to perform at my best when being observed or evaluated.', type: 'scale', dimension: 'performance' },
       { id: 10, text: 'I have a rich inner life and vivid imagination.', type: 'scale', dimension: 'depth' },
       { id: 11, text: 'I notice subtleties in environments and social situations that others seem to miss.', type: 'scale', dimension: 'subtleties' },
-      { id: 12, text: 'I am deeply affected by violence, cruelty, or injustice in the world.', type: 'scale', dimension: 'empathy' }
+      { id: 12, text: 'I am deeply affected by violence, cruelty, or injustice in the world.', type: 'scale', dimension: 'empathy' },
     ],
     scoring: {
       scale: [
-        { min: 0, max: 20, label: 'Low Sensitivity', description: 'You show few characteristics of high sensitivity. You may have a more resilient, adaptable nervous system that handles stimulation and change with relative ease. Your child\'s sensitivity may feel puzzling because it is genuinely different from your own experience.', color: '#4CAF50', recommendations: ['Invest in understanding your child\'s experience from the inside', 'Read first-person accounts from sensitive adults', 'Practice curiosity rather than frustration when your child\'s reactions differ from yours', 'Your resilience is a gift — model it without expecting your child to match it'] },
-        { min: 21, max: 36, label: 'Moderate Sensitivity', description: 'You show some characteristics of high sensitivity. You likely have some intuitive understanding of your child\'s experience, while also having areas where your nervous systems differ significantly.', color: '#2196F3', recommendations: ['Notice which of your child\'s challenges you understand intuitively', 'Be curious about the areas where their experience differs from yours', 'Build your own regulation practice to support your child\'s regulation', 'Connect with other parents who share your level of sensitivity'] },
-        { min: 37, max: 48, label: 'High Sensitivity', description: 'You are likely highly sensitive yourself. This gives you deep intuitive understanding of your child\'s experience — and also creates specific challenges. Your own regulation is the foundation of your child\'s regulation.', color: '#8A6080', recommendations: ['Prioritize your own regulation practice — it is not selfish, it is essential', 'Be aware of emotional resonance — when you absorb your child\'s distress', 'Build in daily decompression time for yourself', 'Connect with other sensitive parents who understand your experience', 'Read "The Highly Sensitive Person" by Elaine Aron for yourself', 'Consider therapy with a therapist who understands HSP adults'] }
-      ]
+        { min: 0, max: 20, label: 'Low Sensitivity', description: "You show few characteristics of high sensitivity. You may have a more resilient, adaptable nervous system. Your child's sensitivity may feel puzzling because it is genuinely different from your own experience.", color: '#4CAF50', recommendations: ["Invest in understanding your child's experience from the inside", 'Read first-person accounts from sensitive adults', "Practice curiosity rather than frustration when your child's reactions differ from yours", 'Your resilience is a gift — model it without expecting your child to match it'] },
+        { min: 21, max: 36, label: 'Moderate Sensitivity', description: "You show some characteristics of high sensitivity. You likely have some intuitive understanding of your child's experience, while also having areas where your nervous systems differ significantly.", color: '#2196F3', recommendations: ["Notice which of your child's challenges you understand intuitively", "Be curious about the areas where their experience differs from yours", 'Build your own regulation practice to support your child', 'Connect with other parents who share your level of sensitivity'] },
+        { min: 37, max: 48, label: 'High Sensitivity', description: "You are likely highly sensitive yourself. This gives you deep intuitive understanding of your child's experience — and also creates specific challenges. Your own regulation is the foundation of your child's regulation.", color: '#8A6080', recommendations: ["Prioritize your own regulation practice — it is not selfish, it is essential", "Be aware of emotional resonance — when you absorb your child's distress", 'Build in daily decompression time for yourself', 'Connect with other sensitive parents who understand your experience', "Read 'The Highly Sensitive Person' by Elaine Aron for yourself", 'Consider therapy with a therapist who understands HSP adults'] },
+      ],
     },
-    created_at: new Date().toISOString()
-  }
+    created_at: new Date().toISOString(),
+  },
+
+  // ─── 6. Anxiety vs. Sensitivity Distinguisher ────────────────────────────────
+  {
+    id: 6,
+    slug: 'anxiety-vs-sensitivity',
+    title: 'Anxiety or Sensitivity? Know the Difference',
+    description: "High sensitivity and anxiety often look alike — but they're not the same thing. This assessment helps you understand whether your child's reactions are rooted in their sensitive temperament, anxiety, or both.",
+    category: 'emotional-wellbeing',
+    hero_url: `${CDN}/library/lib-19.webp`,
+    question_count: 16,
+    time_minutes: 6,
+    questions: [
+      { id: 1, text: 'My child avoids new situations because they fear something bad will happen.', type: 'scale', dimension: 'anxiety' },
+      { id: 2, text: 'My child is overwhelmed by new situations but will engage once they feel safe.', type: 'scale', dimension: 'sensitivity' },
+      { id: 3, text: 'My child worries excessively about things that are unlikely to happen.', type: 'scale', dimension: 'anxiety' },
+      { id: 4, text: "My child's worries are often realistic and based on things they've actually observed.", type: 'scale', dimension: 'sensitivity' },
+      { id: 5, text: "My child's avoidance is increasing over time — they avoid more things than they used to.", type: 'scale', dimension: 'anxiety' },
+      { id: 6, text: "My child's sensitivity is consistent — they've always been this way.", type: 'scale', dimension: 'sensitivity' },
+      { id: 7, text: 'My child experiences physical symptoms of anxiety (stomach aches, headaches, racing heart).', type: 'scale', dimension: 'anxiety' },
+      { id: 8, text: 'My child is physically sensitive to sensory input but not particularly fearful.', type: 'scale', dimension: 'sensitivity' },
+      { id: 9, text: 'My child refuses to do things they previously enjoyed because of fear.', type: 'scale', dimension: 'anxiety' },
+      { id: 10, text: 'My child engages deeply and joyfully with things that interest them, even if they need warm-up time.', type: 'scale', dimension: 'sensitivity' },
+      { id: 11, text: 'My child seeks reassurance excessively — asking "will I be okay?" repeatedly.', type: 'scale', dimension: 'anxiety' },
+      { id: 12, text: 'My child processes situations deeply and asks thoughtful questions, not reassurance-seeking ones.', type: 'scale', dimension: 'sensitivity' },
+      { id: 13, text: 'My child has panic attacks or extreme fear responses disproportionate to the situation.', type: 'scale', dimension: 'anxiety' },
+      { id: 14, text: 'My child is overwhelmed by intensity but not by specific feared objects or situations.', type: 'scale', dimension: 'sensitivity' },
+      { id: 15, text: "My child's functioning (school, friendships, family life) is significantly impaired by their reactions.", type: 'scale', dimension: 'anxiety' },
+      { id: 16, text: 'My child functions well in environments that match their needs.', type: 'scale', dimension: 'sensitivity' },
+    ],
+    scoring: {
+      dimensions: {
+        anxiety: { label: 'Anxiety Indicators', description: 'These responses suggest anxiety patterns — avoidance, excessive worry, physical symptoms, and increasing restriction of life activities. Anxiety is treatable and responds well to evidence-based approaches like CBT and exposure therapy.' },
+        sensitivity: { label: 'Sensitivity Indicators', description: 'These responses suggest high sensitivity patterns — consistent trait-based responses, depth of processing, and engagement when needs are met. Sensitivity is a temperament, not a disorder, and responds to environmental design and understanding.' },
+      },
+      interpretation: [
+        { anxietyDominant: true, label: 'Primarily Anxiety', description: 'Your responses suggest anxiety is playing a significant role alongside or beyond sensitivity. Professional support from a therapist trained in childhood anxiety is strongly recommended.', color: '#F44336', recommendations: ['Consult a child therapist trained in CBT for anxiety', 'Avoid accommodation that reinforces avoidance', 'Work with a professional on gradual exposure', 'Rule out other contributing factors with your pediatrician'] },
+        { mixed: true, label: 'Sensitivity + Anxiety', description: 'Your child likely has both high sensitivity and some anxiety. The sensitivity is the foundation; the anxiety has developed on top of it. Both need to be addressed — but differently.', color: '#FF9800', recommendations: ['Work with a therapist who understands both HSC and anxiety', 'Address environmental fit (sensitivity) AND avoidance patterns (anxiety)', 'Build regulation skills as the foundation for anxiety work', 'Read about the difference between accommodation and support'] },
+        { sensitivityDominant: true, label: 'Primarily Sensitivity', description: "Your child's reactions appear to be rooted in high sensitivity rather than anxiety. Environmental design, understanding, and the right support will make the biggest difference.", color: '#4CAF50', recommendations: ["Focus on environmental fit — reduce unnecessary sensory load", 'Build emotional regulation skills proactively', 'Reframe the trait as a gift that needs the right conditions', 'Connect with other HSC families for support and perspective'] },
+      ],
+    },
+    created_at: new Date().toISOString(),
+  },
+
+  // ─── 7. Parenting Approach Alignment ─────────────────────────────────────────
+  {
+    id: 7,
+    slug: 'parenting-approach-alignment',
+    title: 'Is Your Parenting Approach Right for Your Sensitive Child?',
+    description: "Different parenting styles have very different outcomes for highly sensitive children. This assessment helps you identify where your current approach is working — and where small shifts could make a big difference.",
+    category: 'parenting-strategies',
+    hero_url: `${CDN}/library/lib-36.webp`,
+    question_count: 18,
+    time_minutes: 7,
+    questions: [
+      { id: 1, text: "I validate my child's feelings before trying to solve the problem or change their behavior.", type: 'scale', dimension: 'validation' },
+      { id: 2, text: 'I use calm, regulated language when my child is dysregulated.', type: 'scale', dimension: 'co_regulation' },
+      { id: 3, text: 'I give my child advance warning before transitions or changes in plans.', type: 'scale', dimension: 'preparation' },
+      { id: 4, text: 'I avoid shaming my child for their sensitivity ("stop being so dramatic").', type: 'scale', dimension: 'shame_free' },
+      { id: 5, text: 'I have adjusted our home environment to reduce unnecessary sensory load.', type: 'scale', dimension: 'environment' },
+      { id: 6, text: 'I build in daily quiet and recovery time for my child.', type: 'scale', dimension: 'recovery' },
+      { id: 7, text: 'I set clear, consistent limits while remaining warm and connected.', type: 'scale', dimension: 'limits' },
+      { id: 8, text: "I avoid over-accommodating my child in ways that limit their growth.", type: 'scale', dimension: 'growth' },
+      { id: 9, text: 'I stay regulated myself when my child is dysregulated.', type: 'scale', dimension: 'co_regulation' },
+      { id: 10, text: "I talk about my child's sensitivity as a strength, not a problem.", type: 'scale', dimension: 'framing' },
+      { id: 11, text: 'I prepare my child for new or challenging situations in advance.', type: 'scale', dimension: 'preparation' },
+      { id: 12, text: 'I give my child choices and some control over their environment.', type: 'scale', dimension: 'autonomy' },
+      { id: 13, text: "I take care of my own emotional regulation so I don't add to my child's load.", type: 'scale', dimension: 'co_regulation' },
+      { id: 14, text: 'I celebrate my child when they handle a challenging situation, even imperfectly.', type: 'scale', dimension: 'growth' },
+      { id: 15, text: 'I advocate for my child at school and in other environments.', type: 'scale', dimension: 'advocacy' },
+      { id: 16, text: 'I have learned about high sensitivity and continue to educate myself.', type: 'scale', dimension: 'education' },
+      { id: 17, text: 'I connect with other parents of sensitive children for support.', type: 'scale', dimension: 'support' },
+      { id: 18, text: "I trust that my child's sensitivity is a gift, even on the hardest days.", type: 'scale', dimension: 'framing' },
+    ],
+    scoring: {
+      scale: [
+        { min: 0, max: 35, label: 'Significant Gaps', description: "There are significant gaps between your current approach and what research shows works best for highly sensitive children. The good news: small, consistent changes make a big difference. Start with the two or three areas that scored lowest.", color: '#F44336', recommendations: ['Start with validation — it costs nothing and changes everything', 'Work on your own regulation first', "Read 'The Highly Sensitive Child' by Elaine Aron", 'Consider a parenting coach who specializes in HSC', 'Join an HSC parent community for support and ideas'] },
+        { min: 36, max: 54, label: 'On the Right Path', description: "You're doing many things well. There are specific areas where focused attention could make a meaningful difference. Review the questions where you scored lowest and pick one or two to work on this month.", color: '#FF9800', recommendations: ['Identify your two lowest-scoring areas and focus there', 'Build on what is already working', 'Connect with other HSC parents for fresh ideas', 'Consider reading about the specific areas where you scored lowest'] },
+        { min: 55, max: 72, label: 'Strong Alignment', description: "Your parenting approach is well-aligned with what highly sensitive children need. You're doing the hard work of showing up with warmth, structure, and understanding. Keep going — your child is lucky to have you.", color: '#4CAF50', recommendations: ["Keep investing in your own learning and growth", "Share what's working with other parents", 'Continue to adjust as your child grows and their needs change', "Celebrate yourself — this work is hard and you're doing it well"] },
+      ],
+    },
+    created_at: new Date().toISOString(),
+  },
+
+  // ─── 8. Sleep Readiness Assessment ───────────────────────────────────────────
+  {
+    id: 8,
+    slug: 'sleep-readiness-assessment',
+    title: "Is Your HSC's Sleep Environment Optimized?",
+    description: "Highly sensitive children often struggle with sleep more than their peers. This assessment evaluates your child's sleep environment, routine, and readiness — and gives you a targeted improvement plan.",
+    category: 'sensory-environment',
+    hero_url: `${CDN}/library/lib-26.webp`,
+    question_count: 14,
+    time_minutes: 5,
+    questions: [
+      { id: 1, text: "My child's bedroom is dark enough for sleep (blackout curtains or similar).", type: 'scale', dimension: 'environment' },
+      { id: 2, text: "My child's bedroom is quiet enough — or has white noise to mask disruptive sounds.", type: 'scale', dimension: 'environment' },
+      { id: 3, text: "My child's bedroom temperature is comfortable for sleep.", type: 'scale', dimension: 'environment' },
+      { id: 4, text: "My child's bedding is comfortable — no scratchy fabrics, tags, or uncomfortable textures.", type: 'scale', dimension: 'environment' },
+      { id: 5, text: 'We have a consistent bedtime routine that starts at the same time each night.', type: 'scale', dimension: 'routine' },
+      { id: 6, text: 'Our bedtime routine includes a wind-down period of at least 30 minutes.', type: 'scale', dimension: 'routine' },
+      { id: 7, text: 'We avoid screens for at least 1 hour before bed.', type: 'scale', dimension: 'routine' },
+      { id: 8, text: 'We avoid stimulating activities (rough play, exciting stories, news) close to bedtime.', type: 'scale', dimension: 'routine' },
+      { id: 9, text: 'My child falls asleep within 30 minutes of lights out.', type: 'scale', dimension: 'sleep_onset' },
+      { id: 10, text: 'My child stays asleep through the night most nights.', type: 'scale', dimension: 'sleep_maintenance' },
+      { id: 11, text: 'My child wakes feeling rested and ready for the day.', type: 'scale', dimension: 'sleep_quality' },
+      { id: 12, text: 'My child does not have significant anxiety about going to sleep.', type: 'scale', dimension: 'sleep_anxiety' },
+      { id: 13, text: "My child's daytime behavior is not significantly affected by sleep quality.", type: 'scale', dimension: 'daytime_impact' },
+      { id: 14, text: "My child's sleep needs are being met — they get enough hours for their age.", type: 'scale', dimension: 'sleep_quantity' },
+    ],
+    scoring: {
+      scale: [
+        { min: 0, max: 25, label: 'Significant Sleep Challenges', description: "Your child's sleep environment and/or routine has significant gaps that are likely contributing to dysregulation, emotional reactivity, and daytime challenges. Sleep is foundational — addressing it often improves everything else.", color: '#F44336', recommendations: ['Start with the environment: darkness, quiet, temperature, and comfortable bedding', 'Establish a consistent 30-45 minute wind-down routine', 'Eliminate screens at least 1 hour before bed', 'Consider a weighted blanket for sensory comfort', 'Consult your pediatrician if sleep problems are severe or persistent'] },
+        { min: 26, max: 42, label: 'Room for Improvement', description: "Your child's sleep situation has some strengths but specific gaps. Targeted improvements in the lowest-scoring areas could make a meaningful difference in their daytime regulation and wellbeing.", color: '#FF9800', recommendations: ['Identify the two or three lowest-scoring areas and address them first', 'Consistency is key — even one inconsistent night can disrupt a sensitive child', 'Consider adding white noise if not already using it', 'Review the wind-down routine for stimulating activities'] },
+        { min: 43, max: 56, label: 'Good Sleep Foundation', description: "Your child's sleep environment and routine are well-established. There may be minor areas for improvement, but the overall foundation is solid. Continue maintaining consistency and adjusting as your child grows.", color: '#4CAF50', recommendations: ["Keep the routine consistent even on weekends", "Adjust sleep timing as your child's needs change with age", 'Continue monitoring for signs of sleep regression during stressful periods', "Celebrate this foundation — it's doing a lot of work for your child's regulation"] },
+      ],
+    },
+    created_at: new Date().toISOString(),
+  },
+
+  // ─── 9. Long-Term Thriving Predictor ─────────────────────────────────────────
+  {
+    id: 9,
+    slug: 'long-term-thriving-predictor',
+    title: 'Will Your Sensitive Child Thrive Long-Term?',
+    description: "Research identifies specific protective factors that predict whether highly sensitive children grow into thriving, confident adults. This assessment measures how many of those factors are present in your child's life right now.",
+    category: 'long-term-outcomes',
+    hero_url: `${CDN}/library/lib-40.webp`,
+    question_count: 20,
+    time_minutes: 8,
+    questions: [
+      { id: 1, text: 'My child has at least one adult (parent, teacher, grandparent) who truly understands and accepts their sensitivity.', type: 'scale', dimension: 'secure_attachment' },
+      { id: 2, text: 'My child knows that their sensitivity is a trait, not a flaw.', type: 'scale', dimension: 'self_concept' },
+      { id: 3, text: 'My child has at least one close friendship where they feel accepted.', type: 'scale', dimension: 'social_connection' },
+      { id: 4, text: 'My child has at least one area of genuine strength or passion they are developing.', type: 'scale', dimension: 'strengths' },
+      { id: 5, text: 'My child has basic emotional regulation skills for their age.', type: 'scale', dimension: 'regulation' },
+      { id: 6, text: 'My child is in an environment (school, home) that is reasonably well-matched to their needs.', type: 'scale', dimension: 'environment_fit' },
+      { id: 7, text: 'My child is not being chronically shamed, bullied, or misunderstood by key adults.', type: 'scale', dimension: 'safety' },
+      { id: 8, text: 'My child has opportunities for solitude and recovery built into their life.', type: 'scale', dimension: 'recovery' },
+      { id: 9, text: 'My child is developing a sense of purpose or meaning — things that matter to them.', type: 'scale', dimension: 'meaning' },
+      { id: 10, text: 'My child is learning to advocate for their own needs in age-appropriate ways.', type: 'scale', dimension: 'self_advocacy' },
+      { id: 11, text: 'My child has access to nature, beauty, or art — things that restore them.', type: 'scale', dimension: 'restoration' },
+      { id: 12, text: 'My child is not being pushed to "toughen up" or suppress their sensitivity.', type: 'scale', dimension: 'safety' },
+      { id: 13, text: 'My child has some experience of overcoming challenges — they know they can handle hard things.', type: 'scale', dimension: 'resilience' },
+      { id: 14, text: 'My child is developing a growth mindset — they believe they can learn and improve.', type: 'scale', dimension: 'resilience' },
+      { id: 15, text: 'My child has a positive relationship with their own body and physical experience.', type: 'scale', dimension: 'embodiment' },
+      { id: 16, text: 'My child is not experiencing chronic stress from their home or school environment.', type: 'scale', dimension: 'safety' },
+      { id: 17, text: 'My child has access to professional support (therapist, OT, counselor) if needed.', type: 'scale', dimension: 'support' },
+      { id: 18, text: 'My child is learning that their deep feelings are a gift, not a burden.', type: 'scale', dimension: 'self_concept' },
+      { id: 19, text: 'My child has role models of sensitive adults who are thriving.', type: 'scale', dimension: 'role_models' },
+      { id: 20, text: 'I believe my child will thrive as an adult because of — not despite — their sensitivity.', type: 'scale', dimension: 'parent_belief' },
+    ],
+    scoring: {
+      scale: [
+        { min: 0, max: 39, label: 'Protective Factors Need Building', description: "Several key protective factors are missing or weak in your child's life right now. This is important information — not a judgment. The research is clear: with the right protective factors in place, highly sensitive children thrive. Focus on building the most foundational ones first.", color: '#F44336', recommendations: ['Prioritize secure attachment — your understanding and acceptance is the most powerful protective factor', "Work on your child's self-concept — help them see their sensitivity as a gift", 'Address any chronic stress sources (bullying, shame, environmental mismatch) urgently', 'Connect with professional support if multiple factors are significantly absent', "Read the research on resilience in HSC — it will give you hope and direction"] },
+        { min: 40, max: 59, label: 'Foundation in Progress', description: "Your child has some key protective factors in place, but there are specific gaps worth addressing. You are building the foundation — keep going. The research shows that even partial protective factors make a significant difference.", color: '#FF9800', recommendations: ['Identify the two or three lowest-scoring protective factors and focus there', "Celebrate what is already working — you're doing more right than you might realize", 'Connect with other HSC families for ideas and support', "Continue learning about what helps sensitive children thrive long-term"] },
+        { min: 60, max: 80, label: 'Strong Protective Foundation', description: "Your child has a strong set of protective factors in place. The research strongly predicts positive long-term outcomes for sensitive children with this level of support. Keep building on this foundation as your child grows.", color: '#4CAF50', recommendations: ["Keep investing in the protective factors you've built", "Help your child develop self-awareness about what supports them", 'Share what is working with other parents of sensitive children', "Trust the process — you are raising a child who will change the world in their own quiet, deep way"] },
+      ],
+    },
+    created_at: new Date().toISOString(),
+  },
 ];
 
 export function getAssessments() {
@@ -269,7 +366,7 @@ export function getAssessments() {
     description: a.description,
     category: a.category,
     hero_url: a.hero_url,
-    question_count: a.question_count,
+    question_count: a.questions.length,
     time_minutes: a.time_minutes,
     created_at: a.created_at,
   }));

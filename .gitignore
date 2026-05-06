@@ -4,7 +4,10 @@ dist/
 .env.local
 .env.production
 
-# ZERO IMAGES IN GIT — Section 9B
+# ─── ZERO IMAGES IN REPO (Section 9B) ───
+# Exception: favicon only
+!public/favicon.svg
+
 *.jpg
 *.jpeg
 *.png

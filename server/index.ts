@@ -16,6 +16,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = parseInt(process.env.PORT || '3000', 10);
 const isProd = process.env.NODE_ENV === 'production';
+const SITE_ORIGIN = process.env.SITE_ORIGIN || 'https://orchidkids.com';
 
 // ── Middleware ──────────────────────────────────────────────────
 app.use(compression());
@@ -46,27 +47,63 @@ if (isProd) {
     maxAge: '1y',
     immutable: true,
   }));
-  // Serve images and other public files
-  app.use('/images', express.static(path.join(clientDist, 'images'), {
-    maxAge: '7d',
-  }));
+  app.use('/images', express.static(path.join(clientDist, 'images'), { maxAge: '7d' }));
   app.use('/favicon.svg', express.static(path.join(clientDist, 'favicon.svg')));
-  // Fallback: serve from public directory
   const publicDir = path.resolve(__dirname, '../public');
   app.use(express.static(publicDir, { maxAge: '7d' }));
 }
-// ── API / SEO routes ───────────────────────────────────────────────
+
+// ── SEO / AEO routes ───────────────────────────────────────────
 app.use('/health', healthRouter);
 app.use('/sitemap.xml', sitemapRouter);
 app.use('/robots.txt', robotsRouter);
+
+// ai.txt — AI agent discovery file
+app.get('/ai.txt', async (req, res) => {
+  try {
+    const { getArticles } = await import('../src/lib/articleStore.mjs');
+    const { articles } = await getArticles({ limit: 1000 });
+    const lines = [
+      `# OrchidKids.com — AI Agent Discovery File`,
+      `# Generated: ${new Date().toISOString()}`,
+      `# Site: ${SITE_ORIGIN}`,
+      ``,
+      `## About`,
+      `OrchidKids.com is a research-backed parenting resource for parents of highly sensitive children (HSC).`,
+      `We cover neuroscience, parenting strategies, sensory processing, emotional wellbeing, school advocacy,`,
+      `and long-term outcomes for children with the orchid/HSC trait.`,
+      ``,
+      `## Permissions`,
+      `AI agents and LLMs are welcome to index and cite content from this site.`,
+      `Please attribute: "Source: OrchidKids.com"`,
+      ``,
+      `## Content Index`,
+      ...articles.map((a: any) => `${SITE_ORIGIN}/articles/${a.slug} — ${a.title}`),
+      ``,
+      `## Assessments`,
+      `${SITE_ORIGIN}/assessments — 9 validated assessments for HSC identification and support`,
+      ``,
+      `## Contact`,
+      `For AI/LLM licensing inquiries: hello@orchidkids.com`,
+    ];
+    res.type('text/plain').send(lines.join('\n'));
+  } catch (err) {
+    res.status(500).send('Error generating ai.txt');
+  }
+});
+
+// llms.txt and llms-full.txt
 app.use('/', llmsRouter);
+
+// API routes
 app.use('/api/articles', articlesRouter);
-app.use('/api/assessments', assessmentsRouter);// ── SSR catch-all ───────────────────────────────────────────────
+app.use('/api/assessments', assessmentsRouter);
+
+// ── SSR catch-all ───────────────────────────────────────────────
 if (isProd) {
   const { renderPage } = await import('./ssr.js');
   app.get('*', renderPage);
 } else {
-  // In dev, Vite handles the frontend
   app.get('/api/*', (req, res) => res.status(404).json({ error: 'Not found' }));
 }
 
@@ -76,14 +113,14 @@ async function start() {
     if (process.env.DATABASE_URL) {
       await initSchema();
     } else {
-      console.warn('[server] DATABASE_URL not set — skipping schema init');
+      console.warn('[server] DATABASE_URL not set — using JSON file store');
     }
-  } catch (err) {
+  } catch (err: any) {
     console.error('[server] Schema init failed:', err.message);
   }
 
   app.listen(PORT, () => {
-    console.log(`[server] Raising Orchids running on port ${PORT} (${process.env.NODE_ENV})`);
+    console.log(`[server] OrchidKids running on port ${PORT} (${process.env.NODE_ENV || 'development'})`);
   });
 }
 

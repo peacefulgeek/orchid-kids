@@ -1,16 +1,16 @@
-name: raising-orchids
+name: orchid-kids
 region: nyc
 services:
   - name: web
     github:
-      repo: GITHUB_USER/raising-orchids
+      repo: peacefulgeek/orchid-kids
       branch: main
       deploy_on_push: true
     build_command: pnpm install --frozen-lockfile && pnpm build
-    run_command: NODE_ENV=production node scripts/start-with-cron.mjs
-    http_port: 3000
+    run_command: node scripts/start-with-cron.mjs
     instance_count: 1
     instance_size_slug: basic-xxs
+    http_port: 3000
     health_check:
       http_path: /health
       initial_delay_seconds: 30
@@ -21,22 +21,37 @@ services:
     envs:
       - key: NODE_ENV
         value: production
+        scope: RUN_TIME
       - key: PORT
         value: "3000"
-      - key: DATABASE_URL
         scope: RUN_TIME
-        type: SECRET
+      - key: AUTO_GEN_ENABLED
+        value: "true"
+        scope: RUN_TIME
+      - key: AMAZON_TAG
+        value: spankyspinola-20
+        scope: RUN_TIME
+      - key: SITE_ORIGIN
+        value: https://orchidkids.com
+        scope: RUN_TIME
+
+      # Writing engine — DeepSeek via OpenAI client
       - key: OPENAI_API_KEY
         scope: RUN_TIME
         type: SECRET
       - key: OPENAI_BASE_URL
         value: https://api.deepseek.com
+        scope: RUN_TIME
       - key: OPENAI_MODEL
         value: deepseek-v4-pro
-      - key: AUTO_GEN_ENABLED
-        value: "true"
+        scope: RUN_TIME
+
+      # Database
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        type: SECRET
+
+      # GitHub PAT
       - key: GH_PAT
         scope: RUN_TIME
         type: SECRET
-      - key: AMAZON_TAG
-        value: spankyspinola-20

@@ -10,6 +10,7 @@ import { PrivacyPage } from './pages/PrivacyPage';
 import { AssessmentsPage } from './pages/AssessmentsPage';
 import { AssessmentPage } from './pages/AssessmentPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import SupplementsPage from './pages/SupplementsPage';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/recommended" element={<RecommendedPage />} />
+        <Route path="/supplements" element={<SupplementsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/assessments" element={<AssessmentsPage />} />
         <Route path="/assessments/:slug" element={<AssessmentPage />} />

@@ -149,6 +149,15 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <span>📚 Recommended</span>
             </NavLink>
           </li>
+          <li className="sidebar-nav-item">
+            <NavLink
+              to="/supplements"
+              className={({ isActive }) => isActive ? 'active' : ''}
+              onClick={onClose}
+            >
+              <span>🌿 Supplements & Herbs</span>
+            </NavLink>
+          </li>
         </ul>
       </nav>
 

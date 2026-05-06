@@ -1,15 +1,18 @@
 {
-  "name": "raising-orchids",
+  "name": "orchid-kids",
   "version": "1.0.0",
-  "description": "Raising Orchids — The research-backed, shame-free resource for parents of highly sensitive children",
+  "description": "Orchid Kids — The research-backed, shame-free resource for parents of highly sensitive children",
   "type": "module",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  },
   "scripts": {
-    "dev": "concurrently \"pnpm dev:server\" \"pnpm dev:client\"",
-    "dev:client": "vite",
-    "dev:server": "tsx watch server/index.ts",
-    "build": "pnpm build:client && pnpm build:server",
-    "build:client": "vite build",
+    "dev": "NODE_ENV=development concurrently \"node scripts/start-dev.mjs\" \"vite\"",
+    "build": "pnpm build:client && pnpm build:server && pnpm check:no-images-in-repo",
+    "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:server": "node scripts/build-server.mjs",
+    "check:no-images-in-repo": "node scripts/check-no-images.mjs",
     "start": "NODE_ENV=production node scripts/start-with-cron.mjs",
     "preview": "NODE_ENV=production node dist/index.js",
     "seed": "node scripts/bulk-seed.mjs",
@@ -18,30 +21,28 @@
   },
   "dependencies": {
     "compression": "^1.7.4",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "node-cron": "^3.0.3",
-    "openai": "^4.52.7",
-    "pg": "^8.12.0",
+    "nodemailer": "^6.9.16",
+    "openai": "^4.71.0",
+    "pg": "^8.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.24.1",
-    "serve-static": "^1.15.0"
+    "react-router-dom": "^6.28.0",
+    "serve-static": "^1.16.0",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.14.10",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
     "@types/pg": "^8.11.6",
-    "@types/react": "^18.3.3",
+    "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@vitejs/plugin-react": "^4.3.0",
     "concurrently": "^8.2.2",
-    "esbuild": "^0.21.5",
-    "tsx": "^4.16.2",
-    "typescript": "^5.5.3",
-    "vite": "^5.3.3"
-  },
-  "engines": {
-    "node": ">=20"
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.0",
+    "vite": "^5.4.0"
   }
 }

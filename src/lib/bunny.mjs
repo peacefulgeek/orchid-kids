@@ -1,11 +1,14 @@
-// HARDCODE per site. DO NOT move these to env vars.
-const BUNNY_STORAGE_ZONE = 'raising-orchids';
-const BUNNY_API_KEY      = 'BUNNY_API_KEY_PLACEHOLDER';
-const BUNNY_PULL_ZONE    = 'https://raising-orchids.b-cdn.net';
+// HARDCODED per site — DO NOT move to env vars (per spec Section 9)
+const BUNNY_STORAGE_ZONE = 'orchid-kids2';
+const BUNNY_API_KEY      = 'e6cf9995-cda6-4ce8-a4d61093c099-18b2-4e5c';
+const BUNNY_PULL_ZONE    = 'https://orchid-kids2.b-cdn.net';
 const BUNNY_HOSTNAME     = 'ny.storage.bunnycdn.com';
 
+export { BUNNY_PULL_ZONE };
+
 /**
- * Pick a random library image, copy it to /images/{slug}.webp, return the public URL.
+ * Pick a random library image (lib-01 through lib-40), copy it to
+ * /images/{slug}.webp, and return the public CDN URL.
  * Falls back to the library URL itself if the copy upload fails.
  */
 export async function assignHeroImage(slug) {
@@ -35,6 +38,7 @@ export async function assignHeroImage(slug) {
 
 /**
  * Upload an arbitrary WebP buffer to a target path under the storage zone.
+ * Used by migrate-images-to-bunny.mjs and the bulk seed script.
  */
 export async function uploadWebP(targetPath, buffer) {
   const url = `https://${BUNNY_HOSTNAME}/${BUNNY_STORAGE_ZONE}/${targetPath.replace(/^\//, '')}`;
@@ -47,4 +51,39 @@ export async function uploadWebP(targetPath, buffer) {
   return `${BUNNY_PULL_ZONE}/${targetPath.replace(/^\//, '')}`;
 }
 
-export { BUNNY_PULL_ZONE };
+/**
+ * Upload a site UI asset (hero, OG image, etc.) to Bunny under /site/{filename}
+ */
+export async function uploadSiteAsset(filename, buffer, contentType = 'image/webp') {
+  const url = `https://${BUNNY_HOSTNAME}/${BUNNY_STORAGE_ZONE}/site/${filename}`;
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: { AccessKey: BUNNY_API_KEY, 'Content-Type': contentType },
+    body: buffer,
+  });
+  if (!res.ok) throw new Error(`bunny site asset upload ${res.status} for ${filename}`);
+  return `${BUNNY_PULL_ZONE}/site/${filename}`;
+}
+
+/**
+ * List files in a Bunny storage directory.
+ */
+export async function listBunnyDir(dir = '') {
+  const path = dir ? `/${dir}/` : '/';
+  const url = `https://${BUNNY_HOSTNAME}/${BUNNY_STORAGE_ZONE}${path}`;
+  const res = await fetch(url, { headers: { AccessKey: BUNNY_API_KEY } });
+  if (!res.ok) return [];
+  return await res.json();
+}
+
+/**
+ * Delete a file from Bunny storage.
+ */
+export async function deleteBunnyFile(remotePath) {
+  const url = `https://${BUNNY_HOSTNAME}/${BUNNY_STORAGE_ZONE}/${remotePath.replace(/^\//, '')}`;
+  const res = await fetch(url, {
+    method: 'DELETE',
+    headers: { AccessKey: BUNNY_API_KEY }
+  });
+  return res.ok;
+}
