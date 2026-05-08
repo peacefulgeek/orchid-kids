@@ -30,7 +30,7 @@ function loadArticles() {
     const seedPath = findSeedPath();
     const raw = readFileSync(seedPath, 'utf8');
     const data = JSON.parse(raw);
-    // Normalize fields
+    // Normalize fields — preserve published_at from JSON for date-gating
     _articles = data.map((a, i) => ({
       id: i + 1,
       slug: a.slug,
@@ -44,7 +44,10 @@ function loadArticles() {
       body: a.body || a.content || '',
       word_count: a.word_count || Math.round((a.body || a.content || '').split(' ').length),
       status: 'published',
-      published_at: new Date(Date.now() - (data.length - i) * 24 * 60 * 60 * 1000).toISOString(),
+      // Use published_at from JSON if present; otherwise fall back to a past date
+      published_at: a.published_at
+        ? new Date(a.published_at).toISOString()
+        : new Date(Date.now() - (data.length - i) * 24 * 60 * 60 * 1000).toISOString(),
       last_modified_at: new Date().toISOString(),
     }));
   } catch (err) {
@@ -56,6 +59,10 @@ function loadArticles() {
 
 export function getArticles({ page = 1, limit = 20, category, search } = {}) {
   let articles = loadArticles();
+
+  // Date-gating: only serve articles whose published_at is in the past
+  const now = new Date();
+  articles = articles.filter(a => new Date(a.published_at) <= now);
 
   if (category) {
     articles = articles.filter(a => a.category === category);
@@ -117,7 +124,8 @@ export function getArticleBySlug(slug) {
 }
 
 export function getCategories() {
-  const articles = loadArticles();
+  const now = new Date();
+  const articles = loadArticles().filter(a => new Date(a.published_at) <= now);
   const counts = {};
   for (const a of articles) {
     counts[a.category] = (counts[a.category] || 0) + 1;
@@ -128,7 +136,8 @@ export function getCategories() {
 }
 
 export function getRecentArticles(limit = 5) {
-  const articles = loadArticles();
+  const now = new Date();
+  const articles = loadArticles().filter(a => new Date(a.published_at) <= now);
   return articles.slice(0, limit).map(a => ({
     id: a.id,
     slug: a.slug,
@@ -141,5 +150,8 @@ export function getRecentArticles(limit = 5) {
 }
 
 export function getAllSlugs() {
-  return loadArticles().map(a => a.slug);
+  const now = new Date();
+  return loadArticles()
+    .filter(a => new Date(a.published_at) <= now)
+    .map(a => a.slug);
 }
