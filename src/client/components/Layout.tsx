@@ -32,8 +32,10 @@ export function Layout() {
     return () => { document.body.style.overflow = ''; };
   }, [sidebarOpen]);
 
+  const isHomePage = location.pathname === '/';
+
   return (
-    <div className="site-shell">
+    <div className={`site-shell${isHomePage ? ' no-sidebar' : ''}`}>
       <ReadingProgress />
 
       {/* Sidebar overlay */}
@@ -43,8 +45,9 @@ export function Layout() {
         aria-hidden="true"
       />
 
-      {/* Sidebar */}
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      {/* Sidebar — hidden on homepage */}
+      {!isHomePage && <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />}
+      {isHomePage && sidebarOpen && <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />}
 
       {/* Main content */}
       <div className="main-content">
