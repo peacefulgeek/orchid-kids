@@ -29,6 +29,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   'family-dynamics': 'Family Dynamics',
   'tools-resources': 'Tools & Resources',
   'long-term': 'Long-Term Outcomes',
+  'long-term-outcomes': 'Long-Term Outcomes',
 };
 
 function formatDate(iso?: string) {

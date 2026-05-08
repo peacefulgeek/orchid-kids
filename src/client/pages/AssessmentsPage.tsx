@@ -22,6 +22,7 @@ const CATEGORY_ICONS: Record<string, string> = {
   'school-social': '📚',
   'tools-resources': '🛠️',
   'long-term': '🌱',
+  'long-term-outcomes': '🌱',
 };
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -33,6 +34,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   'school-social': 'School & Social',
   'tools-resources': 'Tools & Resources',
   'long-term': 'Long-Term Outcomes',
+  'long-term-outcomes': 'Long-Term Outcomes',
 };
 
 // Fallback static assessments if API is unavailable

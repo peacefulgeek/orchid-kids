@@ -28,6 +28,7 @@ const CATEGORIES: Record<string, string> = {
   'family-dynamics': 'Family Dynamics',
   'tools-resources': 'Tools & Resources',
   'long-term': 'Long-Term Outcomes',
+  'long-term-outcomes': 'Long-Term Outcomes',
 };
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {

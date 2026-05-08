@@ -23,6 +23,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   'family-dynamics': 'Family Dynamics',
   'tools-resources': 'Tools & Resources',
   'long-term': 'Long-Term Outcomes',
+  'long-term-outcomes': 'Long-Term Outcomes',
 };
 
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
@@ -35,6 +36,7 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   'family-dynamics': 'Siblings, grandparents, partners, and the whole family system when one child is highly sensitive.',
   'tools-resources': 'Occupational therapy, weighted blankets, sensory tools, and what the evidence actually shows.',
   'long-term': 'What highly sensitive children become as adults. Building resilience without breaking the sensitivity.',
+  'long-term-outcomes': 'What highly sensitive children become as adults. Building resilience without breaking the sensitivity.',
 };
 
 export function CategoryPage() {

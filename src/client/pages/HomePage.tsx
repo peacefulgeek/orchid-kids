@@ -18,7 +18,7 @@ const FEATURED_TOPICS = [
   { icon: '🏫', label: 'School & Social', slug: 'school-social', desc: 'Navigating the outside world' },
   { icon: '🌿', label: 'Sensory Environment', slug: 'sensory-environment', desc: 'Creating calm at home' },
   { icon: '💜', label: 'Emotional Wellbeing', slug: 'emotional-wellbeing', desc: 'Feelings and regulation' },
-  { icon: '🌱', label: 'Long-Term Outcomes', slug: 'long-term', desc: 'What sensitive kids become' },
+  { icon: '🌱', label: 'Long-Term Outcomes', slug: 'long-term-outcomes', desc: 'What sensitive kids become' },
 ];
 
 export function HomePage() {
