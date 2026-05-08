@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: orchid-kids
+    runtime: node
+    repo: https://github.com/peacefulgeek/orchid-kids
+    branch: main
+    buildCommand: pnpm install --frozen-lockfile && pnpm build
+    startCommand: node scripts/start-with-cron.mjs
+    healthCheckPath: /health
+    autoDeploy: true
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3000"
+      - key: SITE_ORIGIN
+        value: https://orchidkids.com
+      - key: AMAZON_TAG
+        value: spankyspinola-20
+      - key: AUTO_GEN_ENABLED
+        value: "true"
+      - key: BUNNY_STORAGE_ZONE
+        value: orchid-kids2
+      - key: BUNNY_PULL_ZONE
+        value: https://orchid-kids2.b-cdn.net
+      - key: BUNNY_HOSTNAME
+        value: ny.storage.bunnycdn.com
+      # Add these as secret env vars in Render dashboard:
+      # BUNNY_API_KEY       — Bunny storage write key (e6cf9995-...)
+      # OPENAI_API_KEY      — for quarterly article refresh cron

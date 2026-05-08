@@ -548,3 +548,234 @@
     grid-template-columns: 100px 1fr 40px;
   }
 }
+
+/* ═══════════════════════════════════════════════════
+   BEAUTIFUL RESULT / CONCLUSION PAGE (v2)
+═══════════════════════════════════════════════════ */
+
+.result-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+}
+
+/* Hero tiers */
+.result-tier-high {
+  background: linear-gradient(135deg, #c2185b 0%, #e91e63 40%, #ad1457 100%);
+}
+.result-tier-moderate {
+  background: linear-gradient(135deg, #7b5ea7 0%, #9c6fc4 40%, #6a4c93 100%);
+}
+.result-tier-low {
+  background: linear-gradient(135deg, #388e3c 0%, #4caf50 40%, #2e7d32 100%);
+}
+
+.result-hero {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+.result-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://orchid-kids2.b-cdn.net/images/hero-assessment.webp') center/cover no-repeat;
+  opacity: 0.12;
+  z-index: 0;
+}
+
+.result-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.result-icon {
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  animation: result-bloom 0.6s ease-out;
+}
+
+@keyframes result-bloom {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.result-title {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  margin: 0 0 0.4rem;
+  line-height: 1.15;
+  color: white;
+}
+
+.result-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin: 0 0 1.5rem;
+}
+
+.result-score-ring {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
+}
+
+/* Affirmation banner */
+.result-affirmation {
+  background: linear-gradient(135deg, #fff8f9 0%, #fce4ec 100%);
+  border-left: 4px solid var(--color-primary-light, #f06292);
+  border-radius: 0 16px 16px 0;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.result-affirmation-inner p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--color-text, #2d2d2d);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Cards */
+.result-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.result-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.result-card-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.result-card-header h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-text, #2d2d2d);
+}
+
+/* Dimensions */
+.result-dimensions-intro,
+.result-dimensions-note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.result-dimensions-note {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+/* Next Steps */
+.result-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.result-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.result-step-num {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #e91e63, #c2185b);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.result-step div {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* Action Buttons */
+.result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--color-primary, #e91e63);
+  border-radius: 99px;
+  color: var(--color-primary, #e91e63);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: #fce4ec;
+}
+
+/* Share Note */
+.result-share-note {
+  text-align: center;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #fff8f9, #fce4ec);
+  border-radius: 16px;
+  border: 1px dashed var(--color-primary-light, #f48fb1);
+}
+
+.result-share-note p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #555;
+  margin: 0;
+  font-style: italic;
+}
+
+.result-article-arrow {
+  flex-shrink: 0;
+  font-weight: 700;
+  margin-top: 1px;
+}
+
+@media (max-width: 600px) {
+  .result-hero { padding: 2rem 1rem; border-radius: 16px; }
+  .result-card { padding: 1.25rem; }
+  .result-actions { flex-direction: column; }
+  .result-actions a { text-align: center; justify-content: center; }
+}
