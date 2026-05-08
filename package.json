@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Orchid Kids — The research-backed, shame-free resource for parents of highly sensitive children",
   "type": "module",
+  "packageManager": "pnpm@10.11.0",
   "engines": {
     "node": ">=20.0.0",
-    "pnpm": ">=8.0.0"
+    "pnpm": ">=10.0.0"
   },
   "scripts": {
     "dev": "NODE_ENV=development concurrently \"node scripts/start-dev.mjs\" \"vite\"",
