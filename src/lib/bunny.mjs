@@ -1,10 +1,11 @@
-// Bunny CDN config — set BUNNY_API_KEY env var in production (DigitalOcean App Platform)
+// Bunny CDN config for orchid-kids2 storage zone
+// Storage zone: orchid-kids2 | Pull zone: orchid-kids2.b-cdn.net | Region: New York
 const BUNNY_STORAGE_ZONE = process.env.BUNNY_STORAGE_ZONE || 'orchid-kids2';
-const BUNNY_API_KEY      = process.env.BUNNY_API_KEY || '';
+const BUNNY_API_KEY      = process.env.BUNNY_API_KEY || 'e6cf9995-cda6-4ce8-a4d61093c099-18b2-4e5c';
 const BUNNY_PULL_ZONE    = process.env.BUNNY_PULL_ZONE || 'https://orchid-kids2.b-cdn.net';
 const BUNNY_HOSTNAME     = process.env.BUNNY_HOSTNAME || 'ny.storage.bunnycdn.com';
 
-export { BUNNY_PULL_ZONE };
+export { BUNNY_PULL_ZONE, BUNNY_API_KEY, BUNNY_STORAGE_ZONE, BUNNY_HOSTNAME };
 
 /**
  * Pick a random library image (lib-01 through lib-40), copy it to
@@ -38,7 +39,6 @@ export async function assignHeroImage(slug) {
 
 /**
  * Upload an arbitrary WebP buffer to a target path under the storage zone.
- * Used by migrate-images-to-bunny.mjs and the bulk seed script.
  */
 export async function uploadWebP(targetPath, buffer) {
   const url = `https://${BUNNY_HOSTNAME}/${BUNNY_STORAGE_ZONE}/${targetPath.replace(/^\//, '')}`;

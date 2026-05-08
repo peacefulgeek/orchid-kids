@@ -41,7 +41,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: url('/images/hero-assessment.jpg') center/cover no-repeat;
+  background: url('https://orchid-kids2.b-cdn.net/site/hero-assessment.webp') center/cover no-repeat;
   opacity: 0.15;
 }
 

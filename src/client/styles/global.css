@@ -336,7 +336,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: url('/images/hero-home.jpg') center/cover no-repeat;
+  background: url('https://orchid-kids2.b-cdn.net/site/hero-home.webp') center/cover no-repeat;
   opacity: 0.12;
   pointer-events: none;
 }

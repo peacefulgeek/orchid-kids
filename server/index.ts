@@ -8,7 +8,6 @@ import { sitemapRouter } from './routes/sitemap.js';
 import { robotsRouter } from './routes/robots.js';
 import { llmsRouter } from './routes/llms.js';
 import { assessmentsRouter } from './routes/assessments.js';
-import { initSchema } from '../src/lib/db.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -109,15 +108,8 @@ if (isProd) {
 
 // ── Start ───────────────────────────────────────────────────────
 async function start() {
-  try {
-    if (process.env.DATABASE_URL) {
-      await initSchema();
-    } else {
-      console.warn('[server] DATABASE_URL not set — using JSON file store');
-    }
-  } catch (err: any) {
-    console.error('[server] Schema init failed:', err.message);
-  }
+  // No database — using JSON file store exclusively
+  console.log('[server] Using JSON file store (no database)');
 
   app.listen(PORT, () => {
     console.log(`[server] OrchidKids running on port ${PORT} (${process.env.NODE_ENV || 'development'})`);

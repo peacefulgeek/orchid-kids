@@ -14,13 +14,10 @@ await esbuild.build({
   format: 'esm',
   outfile: path.join(root, 'dist/index.js'),
   external: [
-    'pg',
-    'pg-native',
     'node-cron',
     'openai',
     'express',
     'compression',
-    'serve-static',
     'fsevents',
     'fs',
     'path',

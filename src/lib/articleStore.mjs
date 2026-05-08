@@ -38,7 +38,7 @@ function loadArticles() {
       meta_description: a.meta_description || a.excerpt || '',
       category: a.category,
       tags: a.tags || [],
-      hero_url: a.hero_url || a.image_url || '/images/hero-home.jpg',
+      hero_url: a.hero_url || a.image_url || 'https://orchid-kids2.b-cdn.net/library/lib-01.webp',
       reading_time: a.reading_time || a.read_time || 7,
       author: a.author || 'The Raising Orchids Team',
       body: a.body || a.content || '',
